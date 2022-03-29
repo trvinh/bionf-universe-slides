@@ -1,2 +1,2 @@
 # BIONF tools presentation
-https://trvinh.github.io/bionf_universe_slides/slides/
+https://trvinh.github.io/bionf-universe-slides/slides/#/
