@@ -41,6 +41,7 @@
 						<aside class="notes">
 							Homologous genes = genes that share a common ancestor<br>
 							Result of duplication event => paralogs, speciation event => orthologs
+							Contaimination is what should not be in the assembly, such as bird genes in fist assembly
 						</aside>
 					</section>
 				</section>
@@ -53,6 +54,8 @@
 						<img src="images/021_newspecies.png" style='float: top; border:0; box-shadow: none' height=400/>
 						<p>Does the new fish have the Sprecher pathway<br>(for biosynthesizing of DHA)?</p>
 						<aside class="notes">
+							I start with a typisch question.<br>
+							After we discovered a new species, normally we will ask: can it do this or that function?<br>
 							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
 							Studies in rats and rainbow trout (Regenbogenforelle) confirmed that DHA biosynthesis proceeds through the so-called “Sprecher pathway”,
 						</aside>
@@ -66,21 +69,26 @@
 						<br>
 						<img src="images/031_sequencing.gif" style='float: top; border:0; box-shadow: none' height=400/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Then, what will we do? Just get a sample of that species and perform the sequencing
 						</aside>
 					</section>
 					<section data-transition="none">
 						<br>
 						<img src="images/032_assembly.jpg" style='float: top; border:0; box-shadow: none' height=600/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							This is a standard procedure of any sequencing project.<br>
+							First, we cut the original genome into pieces to put into the sequencing machine and get out milions of sequence reads<br>
+							Then, we use assemble those reads into larger fragments called contigs and scaffolds<br>
+							If we are lucky, we can reconstruct the whole chromosome or original genome<br>
+							After that, we do the genome annotation to predict genes and gene products from the assembly
 						</aside>
 					</section>
 					<section data-transition="none">
 						<br>
 						<img src="images/033_assembly_2.jpg" style='float: top; border:0; box-shadow: none' height=600/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							This gene set or protein set is the fundamental data for studying our species of interest.<br>
+							Because of that, the quality of these data is very important and can affect the conclusion of all downstream analyses
 						</aside>
 					</section>
 				</section>
@@ -92,7 +100,9 @@
 						<img src="images/041_data.jpg" style='float: top; border:0; box-shadow: none' height=200/>
 						<img src="images/042_quality.jpg" style='float: top; border:0; box-shadow: none' height=300/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Therefore, the first step before doing any further investigation is to check for the quality of our assembly and gene annotation<br>
+							There are some basic metrics for evaluate the quality of an assembly, such as N50 length, the genome coverage, BUSCO completeness, etc.<br>
+							And from here come our BIONF tools into the game
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -105,7 +115,11 @@
 						</p>
 						<img src="images/043_taxaminer.jpg" style='float: top; border:0; box-shadow: none' height=150/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							One of the question one can ask after having the assembly is that, is it clean of contamination or HGT?<br>
+							Because contaimination can lead to a wrong intepretation. Such as:<br>
+							Having chloroplast gene in the fish assembly doesn't automatically mean that our fish can do photosynthesize<br>
+							It could just be a side effect of someone eating salad while doing the sequencing...<br>
+							To find out such contamination genes, we can use taXaminer, a tool has been developed by Freya
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -114,7 +128,11 @@
 						<p style="font-size:10px; text-align:right"><em>Freya Arthen (2022), Master thesis</em></p>
 						<p><a href="https://github.com/BIONF/taXaminer" target="_blank">https://github.com/BIONF/taXaminer</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Since Freya has already introduced this tool in her last group seminar, I just make a quick overview<br>
+							taXaminer will have the assembly data as the main input and take into account many characters to cluster the similar genes together,
+							such as the read coverage, the GC content, the gene length, the gene position on the contigs, etc.<br>
+							It uses the Principal component analysis (PCA) to reduce the dimention of those characters into 2 or 3 dimentions
+							in order to be easily shown and intepretated with 2D or 3D plot
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -122,7 +140,8 @@
 						<img src="images/045_taxaminer_example.png" style='float: top; border:0; box-shadow: none' height=550/>
 						<p style="font-size:10px; text-align:right"><em>Freya Arthen (2022), Master thesis</em></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							From the cluster result of taXaminer, we can then inspect the taxonomic assignment of each genes and classify them as contamination or native genes<br>
+							For example......
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -133,7 +152,9 @@
 						</p>
 						<img src="images/046_fcat_logo.png" style='float: top; border:0; box-shadow: none' height=100/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Another question we can ask: Is my gene set complete? This can be answer with the most well-known tool BUSCO.
+							But, we want to know more, which is how complete is my gene set?<br>
+							To adress this question, we have developed fCAT
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -141,14 +162,19 @@
 						<img src="images/047_fcat_workflow.png" style='float: top; border:0; box-shadow: none' height=400/>
 						<p><a href="https://github.com/BIONF/fCAT" target="_blank">https://github.com/BIONF/fCAT</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							The starting point of fCAT is the core set for each taxonomic clade.
+							fCAT core sets are currently created by using OMA ortholog groups, but they can be replaced by any other ortholog groups like from OrthoMCL, OrthoDB,...<br>
+							fCAT will search ortholog for these core groups in the species of interest using a targeted search algorithm,<br>
+							then classify the founded orthologs as complete or fragmented based on the sequence lenght,
+							or as similar or dissimilar based on the protein domain architectures
 						</aside>
 					</section>
 					<section data-transition="none">
 						<br>
 						<img src="images/048_fcat_example.png" style='float: top; border:0; box-shadow: none' height=400/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Different than BUSCO, which can only assign a gene as complete or fragmented, fCAT deliver more information<br>
+							Such as in this example, we found an "fragmented" ortholog in the species of interest, the Trachinus draco....
 						</aside>
 					</section>
 				</section>
@@ -161,7 +187,9 @@
 						<img src="images/051_paper.png" style='float: left; border:0; box-shadow: none' height=200/>
 						<img src="images/052_paper.png" style='float: right; border:0; box-shadow: none' height=200/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							After verify the quality of the assembly and the annotated gene set, we come back to our original question
+							to study about a specific function.<br>
+							For that, we search through literatures for the same study in other organisms and get the reference data
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -170,7 +198,10 @@
 						<p>Feature-aware directed (targeted) ortholog search</p>
 						<img src="images/053_fdog_logo.png" style='float: top; border:0; box-shadow: none' height=100/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							For example, in the case of DHA biosynthesis pathway, the main enzymes are the FADs and ELOVL proteins.<br>
+							To search for those genes in our newly sequenced species, we use the targeted ortholog search tool fDOG.<br>
+							<br>FAD: Flavin adenine dinucleotide => enzyme for fatty acid desaturation (remove 2 Hydrogen atoms to create carbon/carbon double bond)
+							<br>ELOVL: Elongase of very long-chain fatty acid
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -178,7 +209,15 @@
 						<img src="images/054_fdog_workflow.jpg" style='float: top; border:0; box-shadow: none' height=500/>
 						<p><a href="https://github.com/BIONF/fDOG" target="_blank">https://github.com/BIONF/fDOG</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							I hope that you still remember the workflow of fDOG from my last group seminar.<br>
+							Starting with a seed protein (the FAD or ELOVL from the previous slide),
+							fDOG iteratively search for orthologs in a set of so-called core taxa. After each round,
+							new ortholog will be added to the core ortholog group to create a profile HMM for the core group.
+							When the core group reach to a pre-defined number of ortholog, this core compilation step will stop and the final pHMM will be made.<br>
+							Then, fDOG use this pHMM to search for similar sequences in the species of interest.
+							The candidate HMM hits will then be checked, if it passes the reciprocal criterium, it will be considered as an ortholog
+							and will be added to the final ortholog group.<br>
+							Finally, fDOG create a phylogenetic profiles for the seed protein with the founded orthologs in different taxa
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -186,7 +225,10 @@
 						<img src="images/055_pp_simple.png" style='float: top; border:0; box-shadow: none' height=300/>
 						<p>Phylogenetic profile</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							The main purpose of the phylogenetic profiles from fDOG is not different than showing the presence/absence of the seed proteins in a list of diverse species<br>
+							The only different from the original phylogenetic profiles is,
+							that the one from fDOG is not binary but it contains also other measures,
+							namely the domain architecture similarity between the seed and the orthologs
 						</aside>
 					</section>
 				</section>
@@ -199,7 +241,8 @@
 						<p>Visualization and exploration of phylogenetic profiles</p>
 						<img src="images/061_phyloprofile_logo.png" style='float: top; border:0; box-shadow: none' height=100/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							To visualize and explore such complex phylogenetic profiles, a excel table is not always useful.<br>
+							Therefore we have developed this PhyloProfile tool
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -207,7 +250,13 @@
 						<img src="images/062_phyloprofile_features.png" style='float: top; border:0; box-shadow: none' height=500/>
 						<p><a href="https://github.com/BIONF/PhyloProfile" target="_blank">https://github.com/BIONF/PhyloProfile</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							I think some of you already familiar with PhyloProfile.<br>
+							It has a interactive phylogenetic profile plot,
+							in which each dot in the plot show the presence of the ortholog for the corresponding taxon,
+							and the color of the dot or the color of the background represent the value of the protein architecture similarity<br>
+							With PhyloProfile we can not only viewing the comparison of the protein architectures,
+							but we can also perform some downstream analysis, such as estimate the gene age based on the
+							last common ancestor approach; or identify group of core genes that can be used fo a species tree reconstruction
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -215,7 +264,17 @@
 						<img src="images/063_domain_comparison.png" style='float: top; border:0; box-shadow: none' height=400/>
 						<p>Domain (feature) architecture comparison</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							However, the most relevant feature is still the comparison of the protein domain architecture.<br>
+							With this, we can easily find genes that are really changes in their architectures, which suggest also for
+							functional changes. Or, we can figure out, if the difference in the domain architecture is just
+							a technical artifact due to wrong gene prediction.<br>
+							For example here is the domain plot of a human protein agains 2 orthologous proteins from 2 different Chimpanzee gene sets.
+							We see the ortholog in the QfO gene set is much shorter than the one in the Refseq gene set.
+							It is missing the whole path in the C-terminus. So, our hypothesis is a wrong gene prediction happened in the QfO dataset.<br>
+							<em>(The possibility for a gene fission event here is rather low. Because, human and chimp are very close relative.
+							If the fission event happened in Chimp, we should also see that in human.
+							And if it is the case, then we had 2 independent wrong gene prediction in human genn set and in the chimpanzee refseq gene sets.
+							Which is quite hard to believe)</em>
 						</aside>
 					</section>
 				</section>
@@ -229,7 +288,8 @@
 						<p>Feature architecture similarity (FAS) score</p>
 						<img src="images/072_julian.jpg" style='float: top; border:0; box-shadow: none' height=180/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							To sytematically compare the protein architecture, we have come up with a new metric called the FAS score<br>
+							Currently, the FAS scores are calculated using the greedyFAS tool, developed by Julian
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -237,7 +297,11 @@
 						<img src="images/073_FAS.png" style='float: top; border:0; box-shadow: none' height=200/>
 						<p><a href="https://github.com/BIONF/FAS" target="_blank">https://github.com/BIONF/FAS</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							FAS score has a value between 1 and 0; 1: completely similar; 0: completely different or no annotated domain found.<br>
+							Given 2 proteins, greedyFAS will annotate them with different features such as PFAM/SMART domains, transmembrane domains, low complexity regions,...
+							Then, the tool compares the 2 annotated architecture and penalize the missing features, depending on which protein is considered as the reference protein.<br>
+							For example here, if we take A as the reference and compare with B, the Pleckstrin domain is missing, therefore the FAS score in this direction is only 0.6<br>
+							But, in the reverse direction, all the domains of B can be found in A, which will lead to a maximum FAS score of 1.
 						</aside>
 					</section>
 				</section>
@@ -252,7 +316,12 @@
 						<img src="images/082_matt_logo.png" style='float: top; border:0; box-shadow: none' height=150/>
 						<img src="images/083_jeff.jpg" style='float: top; border:0; box-shadow: none' height=150/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							After studying a specific function of the species. Now we are interested in the taxonomy of our new fish,
+							or in a simple word, what kind of fish is my new fish?<br>
+							To answer this question, we reconstructed the phylogenetic tree for our species.
+							Then, if the topology of the tree is not what we expected, we need to perform some topology test.<br>
+							For this purpose, Jeff has created a tool called MATT, which can be use to modify the topology
+							of a given tree and run the topology test on the modified tree
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -260,7 +329,14 @@
 						<img src="images/084_matt_example.png" style='float: top; border:0; box-shadow: none' height=500/>
 						<p><a href="https://github.com/BIONF/MATT" target="_blank">https://github.com/BIONF/MATT</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Here is an example of MATT. I uploaded the alignment and my reconstructed tree into MATT,
+							moved some clade into the position that I though it could be placed there, and perform the topology tests.<br>
+							Here IQtree was used for the testing. Different approaches have been applied,
+							including Kishino & Hasegawa test (HS), Shimodaira & Hasegawa test (SH) or AU (Approximately unbiased) test.<br>
+							Basically, we have here the initial topology and the modified topology.
+							Our null-hypothesis is the alternative topology is significantly different then the original topology (with 95% confidence).
+							If the test rejected the alternative (modified) tree, we will see a minus sign here (p-value less than 5%)
+							(i.e. the modified tree is significantly different than the original one)
 						</aside>
 					</section>
 				</section>
@@ -275,7 +351,10 @@
 						<img src="images/092_andreas.jpg" style='float: top; border:0; box-shadow: none' height=150/>
 						<p><a href="http://g-nom.izn-ffm.intern:5000/g-nom" target="_blank">http://g-nom.izn-ffm.intern:5000/g-nom</a></p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Now, after having a bunch of raw data and analysis outputs,
+							we need to have an effective way to organize and represent our data.<br>
+							Andreas, within the scope of his master thesis, has developed G-NOM,
+							a central data management system for storing data of many thousand assemblies
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -283,7 +362,8 @@
 						<img src="images/093_gnom1.png" style='float: top; border:0; box-shadow: none' height=500/>
 						<p>Assembly information</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							For each assembly, G-NOM contains the information about the assembly itself,
+							such as the number of scaffolds, the assembly and scaffold length, the GC content,...
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -291,7 +371,7 @@
 						<img src="images/094_gnom2.png" style='float: top; border:0; box-shadow: none' height=500/>
 						<p>taXaminer analysis</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							It also can show the result of the quality control with taXaminer,
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -299,7 +379,7 @@
 						<img src="images/095_gnom3.png" style='float: top; border:0; box-shadow: none' height=500/>
 						<p>Gene set completeness</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							or the gene completeness with BUSCO and fCAT
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -307,7 +387,9 @@
 						<img src="images/096_gnom4.png" style='float: top; border:0; box-shadow: none' height=250/>
 						<p>Genome browser</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							Another cool feature of G-NOM is the integrated genome browser.
+							With that we can easily inspect a gene within its of genomic location,
+							like the gene neighborhood, the read coverage, also may be the correctness of the gene annotation<br>
 						</aside>
 					</section>
 				</section>
@@ -326,7 +408,12 @@
 							<img src="images/103_prottrace.png" style='float: top; border:0; box-shadow: none' height=100/>
 						</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							We still have many other tools in the BIONF universe. Such as
+							the fDOG assembly of Hannah, which is similar to fDOG but can work also directly with the assembly data instead of the annotated gene sets<br>
+							We have dcc2, a tool for compiling of core ortholog groups and other required data for fdog and fcat<br>
+							We have protTrace, a tool for estimating the traceeability of a protein to see
+							if an ortholog is missing in the phylogentic profile plot was really a missing gene,
+							or just because the sensitivity of the search algorithm
 						</aside>
 					</section>
 					<section data-transition="none">
@@ -341,7 +428,12 @@
 							<li style="font-size:20px; text-align:left">...</li>
 						</p>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							If you are not interested in working with protein or gene sets,
+							but in the prediction of the non-coding RNA, especially microRNA,
+							you can try ncOrtho, which was currently developed by Felix.<br>
+							Or, if you want to visualize the phylogenetic profiles of a cluster of genes
+							in the correct gene orders, Bardya has the tool Vicinator build exactly for that purpose<br>
+							There are still some other tools in developing, but at this time, I cannot mention them all
 						</aside>
 					</section>
 				</section>
@@ -353,7 +445,15 @@
 						<br>
 						<img src="images/111_summary.jpg" style='float: top; border:0; box-shadow: none' height=620/>
 						<aside class="notes">
-							Docosahexaenoic acid (DHA) plays important physiological roles in vertebrates.
+							As a summary, here I show you the relationship between our tools.<br>
+							The grey arrows shows the input and output flow between the tools;
+							the blue arrows shows the integration of one tool in the others.<br>
+							As we can see here, most of the tools are written in Python and are available
+							as a python package, which means one can install them using pip command<br>
+							For the graphical user interface tools, we have different approaches,
+							from JavaScript for MATT, to React for G-NOM and R-Shiny for PhyloProfile<br>
+							Beside the ability to install the tools from PyPi or Bioconductor,
+							we can get the source code of those tools on the BIONF github repository
 						</aside>
 					</section>
 				</section>
